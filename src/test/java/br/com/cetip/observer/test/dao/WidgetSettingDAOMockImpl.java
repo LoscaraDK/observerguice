@@ -1,8 +1,5 @@
 package br.com.cetip.observer.test.dao;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-
 import com.google.inject.persist.Transactional;
 
 import br.com.cetip.observer.hibernate.dao.IWidgetSettingDAO;

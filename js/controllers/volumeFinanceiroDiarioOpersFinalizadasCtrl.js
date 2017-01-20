@@ -43,8 +43,9 @@ VolumeFinanceiroDiarioOpersFinalizadasCtrl.$inject = ["$scope",
                                       "_volumesPorProduto"];
 
 VolumeFinanceiroDiarioOpersFinalizadasCtrl.resolve = {
-    _volumesPorProduto: ["volumeFinanceiroAPI","$stateParams", function (volumeFinanceiroAPI,$stateParams) {
-    	return volumeFinanceiroAPI.getVolumeFinanceiroDiario().query({data:$stateParams.data,codigoSituacaoOperacao:43});
+    _volumesPorProduto: ["volumeFinanceiroAPI","$stateParams","constantes", function (volumeFinanceiroAPI,$stateParams,constantes) {
+    	console.log($stateParams);
+    	return volumeFinanceiroAPI.getVolumeFinanceiroDiarioFinalizadas();
     }]
 };
 

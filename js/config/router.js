@@ -16,7 +16,7 @@ angular.module('operacao').config(['$stateProvider','$urlRouterProvider', functi
     })
     
     .state("volumefinanceirodiario",{
-        url: "/volumefinanceirodiario/:data",
+        url: "/volumefinanceirodiario",
         
         views:{
 	        operacoesFinalizadas:{        	
@@ -38,7 +38,7 @@ angular.module('operacao').config(['$stateProvider','$urlRouterProvider', functi
     })
     
     .state("dashboard",{
-        url: "/dashboard/:data",
+        url: "/dashboard",
         templateUrl: "js/gridster/dashboard.html",
         controller: "dashboardCtrl"
     })

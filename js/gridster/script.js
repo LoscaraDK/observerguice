@@ -34,7 +34,7 @@ angular.module('mainApp.controllers',[])
       };
       
       //Chamar um serviço por injection
-      console.log($injector.get('volumeFinanceiroAPI')['getVolumeFinanceiroDiario']().query({data:$stateParams.data,codigoSituacaoOperacao:43}));
+      console.log($injector.get('volumeFinanceiroAPI')['getVolumeFinanceiroDiarioFinalizadas']());
       
       //console.log(generator)
       $scope.dashboard = {
@@ -103,7 +103,7 @@ angular.module('mainApp.controllers',[])
             	  [
             	   {
             	  key: 'teste', 
-            	  values: $injector.get('volumeFinanceiroAPI')['getVolumeFinanceiroDiario']().query({data:$stateParams.data,codigoSituacaoOperacao:43}),
+            	  values: $injector.get('volumeFinanceiroAPI')['getVolumeFinanceiroDiarioFinalizadas'](),
             	   }
             	  ],
               api: {}
@@ -123,7 +123,15 @@ angular.module('mainApp.controllers',[])
             data: generator.stackedAreaChart.data(),
             api: {}
           }
-        }]
+        }
+        
+        ,{
+            sizeY: 1,
+            sizeX: 1,
+            name: "Teste"
+          }
+        
+        ]
       };
 
       // widget events
@@ -189,6 +197,7 @@ angular.module('mainApp.controllers',[])
     function($scope, $timeout, $rootScope, $modalInstance, widget, generator) {
       $scope.widget = widget;
       $scope.widgetTypes = Object.keys(generator);
+      $scope.widgetQuerys = [];
 
       $scope.form = {
         name: widget.name,
@@ -196,7 +205,9 @@ angular.module('mainApp.controllers',[])
         sizeY: widget.sizeY,
         col: widget.col,
         row: widget.row,
-        type: widget.type
+        type: widget.type,
+        //novo
+        query: widget.query
       };
 
       $scope.sizeOptions = [{

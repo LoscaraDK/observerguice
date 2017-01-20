@@ -44,8 +44,8 @@ VolumeFinanceiroDiarioOpersPendCtrParte.$inject = ["$scope",
                                       "_volumesPorProduto"];
 
 VolumeFinanceiroDiarioOpersPendCtrParte.resolve = {
-    _volumesPorProduto: ["volumeFinanceiroAPI","$stateParams", function (volumeFinanceiroAPI,$stateParams) {
-    	return volumeFinanceiroAPI.getVolumeFinanceiroDiario().query({data:$stateParams.data,codigoSituacaoOperacao:128});
+    _volumesPorProduto: ["volumeFinanceiroAPI","$stateParams","constantes", function (volumeFinanceiroAPI,$stateParams) {
+    	return volumeFinanceiroAPI.getVolumeFinanceiroDiarioPendContraParte();
     }]
 };
 

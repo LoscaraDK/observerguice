@@ -1,12 +1,11 @@
 package br.com.cetip.observer.test;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.server.ResourceConfig;
@@ -16,10 +15,11 @@ import org.junit.Test;
 
 import com.google.inject.Guice;
 
-import br.com.cetip.observer.dto.VolumeFinanceiroDiarioDTO;
+import br.com.cetip.observer.hibernate.dao.IGenericDAO;
 import br.com.cetip.observer.hibernate.dao.IWidgetSettingDAO;
-import br.com.cetip.observer.hibernate.entity.Chart;
 import br.com.cetip.observer.hibernate.entity.Widget;
+import br.com.cetip.observer.hibernate.entity.WidgetQuery;
+import br.com.cetip.observer.hibernate.entity.WidgetType;
 import br.com.cetip.observer.services.impl.SettingService;
 import br.com.cetip.observer.test.conf.TestModule;
 
@@ -40,7 +40,9 @@ public class WidgetSettingTeste extends JerseyTestNg.ContainerPerClassTest {
 	public void save(){
 		Calendar c = Calendar.getInstance();
 		c.set(2016, Calendar.DECEMBER, 23);
-		Widget widget = new Widget(1,1,1,1,"teste","teste",c,111L,new Chart("options","data","api",c));
+		WidgetQuery widgetQuery = new WidgetQuery();
+		WidgetType widgetType = new WidgetType();
+		Widget widget = new Widget(c, 1, "teste", 1, 1, 2, 2, null, null);
 		Entity<Widget> widgetJson = Entity.entity(widget, MediaType.APPLICATION_JSON_TYPE);
 		target("/setting/save").request().post(widgetJson);
 		

@@ -8,6 +8,7 @@ import org.junit.Before;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 
+import br.com.cetip.observer.hibernate.dao.IGenericDAO;
 import br.com.cetip.observer.hibernate.dao.IOperacaoDAO;
 import br.com.cetip.observer.test.conf.JPAInitializer;
 import br.com.cetip.observer.test.conf.TestModule;
@@ -15,6 +16,9 @@ import br.com.cetip.observer.test.conf.TestModule;
 public class JunitGeneric {
 	@Inject
 	IOperacaoDAO dao;
+	
+	@Inject
+	IGenericDAO generic;
 	
 	@Inject
 	EntityManager entityManager;

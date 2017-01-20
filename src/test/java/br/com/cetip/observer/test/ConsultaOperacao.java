@@ -10,7 +10,7 @@ import br.com.cetip.observer.dto.VolumeFinanceiroDiarioDTO;
 
 public class ConsultaOperacao extends JunitGeneric{
 	
-	@Test
+//	@Test
 	public void testaVolFinanceiroDiarioComStatus(){
 		System.out.println("Entrou aqui");
 		Calendar c = Calendar.getInstance();
@@ -24,5 +24,18 @@ public class ConsultaOperacao extends JunitGeneric{
 		}
 		System.out.println("total> "+list.size());
 		System.out.println(list);
+	}
+	
+	
+	@Test
+	public void testGetDataHOje(){
+		Calendar c = null;
+		try {
+			c = generic.getDataHoje();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(c);
 	}
 }

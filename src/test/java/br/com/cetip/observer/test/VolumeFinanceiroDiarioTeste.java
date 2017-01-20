@@ -16,6 +16,7 @@ import org.junit.Test;
 import com.google.inject.Guice;
 
 import br.com.cetip.observer.dto.VolumeFinanceiroDiarioDTO;
+import br.com.cetip.observer.hibernate.dao.IGenericDAO;
 import br.com.cetip.observer.hibernate.dao.IOperacaoDAO;
 import br.com.cetip.observer.services.impl.VolumeFinanceiroDiarioService;
 import br.com.cetip.observer.test.conf.TestModule;
@@ -24,13 +25,16 @@ public class VolumeFinanceiroDiarioTeste extends JerseyTestNg.ContainerPerClassT
 	@Inject
 	IOperacaoDAO dao;
 	
+	@Inject
+	IGenericDAO generic;
+	
 	@Override
 	protected Application configure() {
 		enable(TestProperties.LOG_TRAFFIC);
 		enable(TestProperties.DUMP_ENTITY);
 		// TODO Auto-generated method stub
 		Guice.createInjector(new TestModule()).injectMembers(this);
-		return new ResourceConfig().register(new VolumeFinanceiroDiarioService(dao));
+		return new ResourceConfig().register(new VolumeFinanceiroDiarioService(dao,generic));
 	}
 	
 	@Test

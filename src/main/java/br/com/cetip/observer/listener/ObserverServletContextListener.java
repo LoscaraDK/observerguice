@@ -24,7 +24,9 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 import br.com.cetip.observer.config.RestServletModule;
+import br.com.cetip.observer.hibernate.dao.IGenericDAO;
 import br.com.cetip.observer.hibernate.dao.IOperacaoDAO;
+import br.com.cetip.observer.hibernate.dao.impl.GenericDAOImpl;
 import br.com.cetip.observer.hibernate.dao.impl.OperacaoDAOImpl;
 
 public class ObserverServletContextListener extends GuiceServletContextListener {
@@ -39,6 +41,7 @@ public class ObserverServletContextListener extends GuiceServletContextListener 
 				filter("/*").through(PersistFilter.class);
 				
 				bind(IOperacaoDAO.class).to(OperacaoDAOImpl.class);
+				bind(IGenericDAO.class).to(GenericDAOImpl.class);
 			}
 	    });
 	}
