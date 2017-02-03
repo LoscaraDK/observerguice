@@ -157,7 +157,7 @@
          <configuration>
                     <webResources>        
                         <resource>
-                            <directory>src/main/java/META-INF</directory>
+                            <directory>src/main/resources/META-INF</directory>
                             <targetPath>WEB-INF/classes/META-INF</targetPath>
                             <includes>
                                 <include>persistence.xml</include>

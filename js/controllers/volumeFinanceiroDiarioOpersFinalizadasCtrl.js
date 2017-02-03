@@ -14,8 +14,8 @@ function VolumeFinanceiroDiarioOpersFinalizadasCtrl($scope,
 		            bottom: 60,
 		            left: 150
 		        },
-		        x: function(d){ return d.codTipoIF; },
-		        y: function(d){ return d.volFinanceiro; },
+		        x: function(d){ return d.key; },
+		        y: function(d){ return d.value; },
 		        showValues: true,
 		        valueFormat: function(d){
 		            return d3.format(',.4f')(d);

@@ -8,64 +8,34 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName(value="volumefinanceirodiario",namespace="volumefinanceirodiario")
 public class VolumeFinanceiroDiarioDTO {
 	
-	private Long totalOperacoes;
-	private BigDecimal volFinanceiro;
-	private String desSituacaoOperacao;
-	private String codTipoIF;
+	private BigDecimal value;
+	private String key;
 	
 	public VolumeFinanceiroDiarioDTO() {
 	}
 	
-	public VolumeFinanceiroDiarioDTO(Long totalOperacoes, BigDecimal volFinanceiro, String desSituacaoOperacao,
-			String codTipoIF) {
+	public VolumeFinanceiroDiarioDTO(BigDecimal value, String key) {
 		super();
-		this.totalOperacoes = totalOperacoes;
-		this.volFinanceiro = volFinanceiro;
-		this.desSituacaoOperacao = desSituacaoOperacao;
-		this.codTipoIF = codTipoIF;
+		this.value = value;
+		this.key = key;
 	}
-
 
 	@JsonProperty
-	public Long getTotalOperacoes() {
-		return totalOperacoes;
+	public BigDecimal getValue() {
+		return value;
 	}
-
 
 	@JsonProperty
-	public BigDecimal getVolFinanceiro() {
-		return volFinanceiro;
+	public String getKey() {
+		return key;
 	}
 
-
-	@JsonProperty
-	public String getDesSituacaoOperacao() {
-		return desSituacaoOperacao;
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
 
-
-	@JsonProperty
-	public String getCodTipoIF() {
-		return codTipoIF;
-	}
-	
-	public void setTotalOperacoes(Long totalOperacoes) {
-		this.totalOperacoes = totalOperacoes;
-	}
-
-
-	public void setVolFinanceiro(BigDecimal volFinanceiro) {
-		this.volFinanceiro = volFinanceiro;
-	}
-
-
-	public void setDesSituacaoOperacao(String desSituacaoOperacao) {
-		this.desSituacaoOperacao = desSituacaoOperacao;
-	}
-
-
-	public void setCodTipoIF(String codTipoIF) {
-		this.codTipoIF = codTipoIF;
+	public void setKey(String key) {
+		this.key = key;
 	}
 	
 }

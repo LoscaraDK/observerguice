@@ -1,9 +1,31 @@
 package br.com.cetip.observer.hibernate.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonClassDescription;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 
 /**
@@ -11,44 +33,73 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="WIDGET_QUERY")
+@Table(name="WIDGET_QUERY",schema="CETIP")
 @NamedQuery(name="WidgetQuery.findAll", query="SELECT w FROM WidgetQuery w")
+@JsonRootName(value="widgetQuery",namespace="widgetQuery")
+@XmlRootElement(name="widgetQuery",namespace="widgetQuery")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonClassDescription(value="widgetQuery")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class WidgetQuery implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	
+	
+	public WidgetQuery() {
+		super();
+	}
+
+	public WidgetQuery(long numIdWidgetQuery) {
+		super();
+		this.numIdWidgetQuery = numIdWidgetQuery;
+	}
+	
+	public WidgetQuery(Calendar datInclusao, String desQuery, String nomMethodQuery, String nomService) {
+		super();
+		this.datInclusao = datInclusao;
+		this.desQuery = desQuery;
+		this.nomMethodQuery = nomMethodQuery;
+		this.nomService = nomService;
+	}
 
 	@Id
 	@SequenceGenerator(name="WIDGET_QUERY_NUMIDWIDGETQUERY_GENERATOR", sequenceName="S_WIDGET_QUERY",schema="CETIP")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="WIDGET_QUERY_NUMIDWIDGETQUERY_GENERATOR")
 	@Column(name="NUM_ID_WIDGET_QUERY")
+	@JsonProperty
 	private long numIdWidgetQuery;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_ALTERACAO")
+	@JsonProperty
 	private Calendar datAlteracao;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_EXCLUSAO")
+	@JsonProperty
 	private Calendar datExclusao;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_INCLUSAO")
+	@JsonProperty
 	private Calendar datInclusao;
 
 	@Column(name="DES_QUERY")
+	@JsonProperty
 	private String desQuery;
 
 	@Column(name="NOM_METHOD_QUERY")
+	@JsonProperty
 	private String nomMethodQuery;
 
 	@Column(name="NOM_SERVICE")
+	@JsonProperty
 	private String nomService;
 
 	//bi-directional many-to-one association to Widget
-	@OneToMany(mappedBy="widgetQuery")
+	@OneToMany(mappedBy="widgetQuery",fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Widget> widgets;
-
-	public WidgetQuery() {
-	}
 
 	public long getNumIdWidgetQuery() {
 		return this.numIdWidgetQuery;
@@ -126,6 +177,12 @@ public class WidgetQuery implements Serializable {
 		widget.setWidgetQuery(null);
 
 		return widget;
+	}
+
+	@Override
+	public String toString() {
+		return "WidgetQuery [numIdWidgetQuery=" + numIdWidgetQuery +  ", desQuery=" + desQuery + ", nomMethodQuery="
+				+ nomMethodQuery + ", nomService=" + nomService + "]";
 	}
 
 }

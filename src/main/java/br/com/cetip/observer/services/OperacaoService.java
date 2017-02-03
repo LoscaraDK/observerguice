@@ -1,4 +1,4 @@
-package br.com.cetip.observer.services.impl;
+package br.com.cetip.observer.services;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package br.com.cetip.observer.services.impl;
+package br.com.cetip.observer.services;
 
 import java.util.Calendar;
 import java.util.List;

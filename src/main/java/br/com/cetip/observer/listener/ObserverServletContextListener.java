@@ -24,10 +24,14 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 import br.com.cetip.observer.config.RestServletModule;
+import br.com.cetip.observer.hibernate.dao.IDashboardDAO;
 import br.com.cetip.observer.hibernate.dao.IGenericDAO;
 import br.com.cetip.observer.hibernate.dao.IOperacaoDAO;
+import br.com.cetip.observer.hibernate.dao.IWidgetSettingDAO;
+import br.com.cetip.observer.hibernate.dao.impl.DashBoardDAOImpl;
 import br.com.cetip.observer.hibernate.dao.impl.GenericDAOImpl;
 import br.com.cetip.observer.hibernate.dao.impl.OperacaoDAOImpl;
+import br.com.cetip.observer.hibernate.dao.impl.WidgetSettingDAOImpl;
 
 public class ObserverServletContextListener extends GuiceServletContextListener {
 	@Override
@@ -41,7 +45,9 @@ public class ObserverServletContextListener extends GuiceServletContextListener 
 				filter("/*").through(PersistFilter.class);
 				
 				bind(IOperacaoDAO.class).to(OperacaoDAOImpl.class);
+				bind(IWidgetSettingDAO.class).to(WidgetSettingDAOImpl.class);
 				bind(IGenericDAO.class).to(GenericDAOImpl.class);
+				bind(IDashboardDAO.class).to(DashBoardDAOImpl.class);
 			}
 	    });
 	}

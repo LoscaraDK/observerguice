@@ -20,7 +20,7 @@ import br.com.cetip.observer.hibernate.dao.IWidgetSettingDAO;
 import br.com.cetip.observer.hibernate.entity.Widget;
 import br.com.cetip.observer.hibernate.entity.WidgetQuery;
 import br.com.cetip.observer.hibernate.entity.WidgetType;
-import br.com.cetip.observer.services.impl.SettingService;
+import br.com.cetip.observer.services.WidgetSettingService;
 import br.com.cetip.observer.test.conf.TestModule;
 
 public class WidgetSettingTeste extends JerseyTestNg.ContainerPerClassTest {
@@ -33,7 +33,7 @@ public class WidgetSettingTeste extends JerseyTestNg.ContainerPerClassTest {
 		enable(TestProperties.DUMP_ENTITY);
 		// TODO Auto-generated method stub
 		Guice.createInjector(new TestModule()).injectMembers(this);
-		return new ResourceConfig().register(new SettingService(dao));
+		return new ResourceConfig().register(new WidgetSettingService(dao));
 	}
 	
 	@Test
@@ -46,5 +46,21 @@ public class WidgetSettingTeste extends JerseyTestNg.ContainerPerClassTest {
 		Entity<Widget> widgetJson = Entity.entity(widget, MediaType.APPLICATION_JSON_TYPE);
 		target("/setting/save").request().post(widgetJson);
 		
+	}
+	
+	@Test
+	public void getAllTypes() throws Exception{
+		System.out.println("Types: " + dao.getAllTypes());
+		System.out.println(dao.getAllTypes().get(0).getOptions());
+	}
+	
+	@Test
+	public void getAllQuerys() throws Exception{
+		System.out.println("Querys: " + dao.getAllQuerys());
+	}
+	
+	@Test
+	public void getAllById() throws Exception{
+		System.out.println("Widgets: " + dao.getAllById(1L));
 	}
 }

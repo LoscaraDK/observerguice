@@ -60,9 +60,7 @@ public class OperacaoDAOImpl implements IOperacaoDAO {
 	
 
 	private final String HQL_VOL_FINANCEIRO_DIARIO =   " SELECT new br.com.cetip.observer.dto.VolumeFinanceiroDiarioDTO (" +
-													   "	count(O.numIdOperacao), " +
 													   " 		sum(O.valFinanceiro), " +
-													   " 		SOP.desSituacaoOperacao, " +
 													   " 		TIF.codTipoIf )" +
 													   " FROM VmContasInfohub V, " +
 													   "  	  Operacao O, " +
@@ -82,7 +80,7 @@ public class OperacaoDAOImpl implements IOperacaoDAO {
 													   " AND O.valFinanceiro > 0 " +
 													   " GROUP BY TIF.codTipoIf, " +
 													   "          SOP.desSituacaoOperacao " +
-													   " ORDER BY 2 desc ";
+													   " ORDER BY 1 desc ";
 											   
 	/* (non-Javadoc)
 	 * @see br.com.cetip.observer.hibernate.dao.impl.IOperacaoDAO#getVolFinanceiroDiarioComStatus(java.lang.Integer, java.util.Calendar)

@@ -1,8 +1,29 @@
 package br.com.cetip.observer.hibernate.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Calendar;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 
 /**
@@ -10,10 +31,26 @@ import java.util.Calendar;
  * 
  */
 @Entity
-@NamedQuery(name="Widget.findAll", query="SELECT w FROM Widget w")
+@Table(name="WIDGET",schema="CETIP")
+@NamedQueries
+({
+@NamedQuery(name="Widget.findAll", query="SELECT w FROM Widget w"),
+@NamedQuery(name="Widget.findByUserId", query="SELECT w FROM Widget w JOIN FETCH w.widgetQuery JOIN FETCH w.widgetType WHERE w.numIdUsuario = :numIdUsuario"),
+@NamedQuery(name="Widget.deleteById", query="DELETE FROM Widget w WHERE w.numIdWidget = :numIdWidget"),
+@NamedQuery(name="Widget.findAllByUser", query="SELECT w FROM Widget w WHERE w.numIdUsuario = :numIdUsuario")
+
+})
+
+@JsonRootName(value="widget",namespace="widget")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Widget implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	public Widget(long numIdWidget) {
+		super();
+		this.numIdWidget = numIdWidget;
+	}
+	
 	public Widget(Calendar datInclusao, long numIdUsuario, String title, long widgetCol, long widgetRow,
 			long widgetSizex, long widgetSizey, WidgetQuery widgetQuery, WidgetType widgetType) {
 		super();
@@ -29,50 +66,66 @@ public class Widget implements Serializable {
 	}
 
 	@Id
-	@SequenceGenerator(name="WIDGET_NUMIDWIDGET_GENERATOR", sequenceName="S_WIDGET",schema="CETIP")
+	@SequenceGenerator(name="WIDGET_NUMIDWIDGET_GENERATOR", sequenceName="S_WIDGET",schema="CETIP",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="WIDGET_NUMIDWIDGET_GENERATOR")
 	@Column(name="NUM_ID_WIDGET")
+	@JsonProperty
 	private long numIdWidget;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_ALTERACAO")
+	@JsonProperty
 	private Calendar datAlteracao;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_EXCLUSAO")
+	@JsonProperty
 	private Calendar datExclusao;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_INCLUSAO")
+	@JsonProperty
 	private Calendar datInclusao;
 
 	@Column(name="NUM_ID_ENTIDADE_ATUALIZ")
+	@JsonProperty
 	private long numIdEntidadeAtualiz;
 
 	@Column(name="NUM_ID_USUARIO")
+	@JsonProperty
 	private long numIdUsuario;
-
+	
+	@JsonProperty
+	@Column(name="TITLE")
 	private String title;
 
 	@Column(name="WIDGET_COL")
+	@JsonProperty(value="col")
 	private long widgetCol;
 
 	@Column(name="WIDGET_ROW")
+	@JsonProperty(value="row")
 	private long widgetRow;
 
 	@Column(name="WIDGET_SIZEX")
+	@JsonProperty(value="sizeX")
 	private long widgetSizex;
-
+	
 	@Column(name="WIDGET_SIZEY")
+	@JsonProperty(value="sizeY")
 	private long widgetSizey;
 
 	//bi-directional many-to-one association to WidgetQuery
-	@ManyToOne
+//	@JsonBackReference(value="widgetQuery")
+	@JsonProperty
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="NUM_ID_WIDGET_QUERY",nullable=true)
 	private WidgetQuery widgetQuery;
 
 	//bi-directional many-to-one association to WidgetType
-	@ManyToOne
+//	@JsonBackReference(value="widgetType")
+	@JsonProperty
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="NUM_ID_WIDGET_TYPE",nullable=true)
 	private WidgetType widgetType;
 
@@ -181,6 +234,11 @@ public class Widget implements Serializable {
 
 	public void setWidgetType(WidgetType widgetType) {
 		this.widgetType = widgetType;
+	}
+
+	@Override
+	public String toString() {
+		return "Widget [numIdWidget=" + numIdWidget +  ", numIdUsuario="	+ numIdUsuario + "]";
 	}
 
 }

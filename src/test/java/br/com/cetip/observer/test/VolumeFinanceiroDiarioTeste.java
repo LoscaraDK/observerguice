@@ -18,7 +18,7 @@ import com.google.inject.Guice;
 import br.com.cetip.observer.dto.VolumeFinanceiroDiarioDTO;
 import br.com.cetip.observer.hibernate.dao.IGenericDAO;
 import br.com.cetip.observer.hibernate.dao.IOperacaoDAO;
-import br.com.cetip.observer.services.impl.VolumeFinanceiroDiarioService;
+import br.com.cetip.observer.services.VolumeFinanceiroDiarioService;
 import br.com.cetip.observer.test.conf.TestModule;
 
 public class VolumeFinanceiroDiarioTeste extends JerseyTestNg.ContainerPerClassTest {
@@ -41,8 +41,8 @@ public class VolumeFinanceiroDiarioTeste extends JerseyTestNg.ContainerPerClassT
 	public void testGetAll(){
 		List<VolumeFinanceiroDiarioDTO> list = target("/volumefinanceirodiario/2016-12-29/43").request().get(new GenericType<List<VolumeFinanceiroDiarioDTO>>(){});
 		for (VolumeFinanceiroDiarioDTO volumeFinanceiroDiarioDTO : list) {
-			Assert.assertNotNull(volumeFinanceiroDiarioDTO.getCodTipoIF());
-			Assert.assertNotNull(volumeFinanceiroDiarioDTO.getVolFinanceiro());
+			Assert.assertNotNull(volumeFinanceiroDiarioDTO.getKey());
+			Assert.assertNotNull(volumeFinanceiroDiarioDTO.getValue());
 		}
 	}
 	

@@ -1,9 +1,13 @@
 package br.com.cetip.observer.test.dao;
 
+import java.util.List;
+
 import com.google.inject.persist.Transactional;
 
 import br.com.cetip.observer.hibernate.dao.IWidgetSettingDAO;
 import br.com.cetip.observer.hibernate.entity.Widget;
+import br.com.cetip.observer.hibernate.entity.WidgetQuery;
+import br.com.cetip.observer.hibernate.entity.WidgetType;
 
 public class WidgetSettingDAOMockImpl implements IWidgetSettingDAO {
 	
@@ -30,7 +34,7 @@ public class WidgetSettingDAOMockImpl implements IWidgetSettingDAO {
 	 */
 	@Override
 	@Transactional
-	public void delete(Widget widget) throws Exception{
+	public void delete(long id) throws Exception{
 		
 	}
 	
@@ -41,6 +45,24 @@ public class WidgetSettingDAOMockImpl implements IWidgetSettingDAO {
 	@Transactional
 	public void update(Widget widget) throws Exception{
 	
+	}
+
+	@Override
+	public List<WidgetType> getAllTypes() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WidgetQuery> getAllQuerys() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Widget> getAllById(Long idUser) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

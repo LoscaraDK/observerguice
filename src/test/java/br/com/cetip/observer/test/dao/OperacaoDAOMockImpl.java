@@ -52,10 +52,10 @@ public class OperacaoDAOMockImpl implements IOperacaoDAO {
 		System.out.println("entrou aqui no metodo getVolFinanceiroDiarioComStatus - classe Mock de teste");
 		List<VolumeFinanceiroDiarioDTO> resultado = new ArrayList<>();
 		
-		resultado.add(new VolumeFinanceiroDiarioDTO(1L,new BigDecimal(3.5),"Finalizada","CDB"));
-		resultado.add(new VolumeFinanceiroDiarioDTO(2L,new BigDecimal(4.5),"Finalizada","CDBS"));
-		resultado.add(new VolumeFinanceiroDiarioDTO(3L,new BigDecimal(5.5),"Finalizada","CDBV"));
-		resultado.add(new VolumeFinanceiroDiarioDTO(4L,new BigDecimal(6.5),"Finalizada","DI"));
+		resultado.add(new VolumeFinanceiroDiarioDTO(new BigDecimal(3.5),"CDB"));
+		resultado.add(new VolumeFinanceiroDiarioDTO(new BigDecimal(4.5),"CDBS"));
+		resultado.add(new VolumeFinanceiroDiarioDTO(new BigDecimal(5.5),"CDBV"));
+		resultado.add(new VolumeFinanceiroDiarioDTO(new BigDecimal(6.5),"DI"));
 		
 		return resultado;
 	}

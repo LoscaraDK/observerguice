@@ -8,10 +8,10 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <div class="form-group" ng-class="{error: _form.name.$error && _form.submitted}">
+                    <div class="form-group" ng-class="{error: _form.title.$error && _form.submitted}">
                         <label class="control-label col-lg-4 col-md-4">Name</label>
                         <div class="col-lg-8 col-md-8">
-                            <input name="name" type="text" ng-model="form.name" class="form-control" />
+                            <input name="title" type="text" ng-model="form.title" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -19,22 +19,22 @@
                     <div class="form-group">
                         <label class="control-label col-lg-4 col-md-4">Type</label>
                         <div class="col-lg-8 col-md-8">
-                            <select name="type"
+                            <select name="numIdWidgetType"
                                     class="form-control"
-                                    ng-model="form.type"
-                                    ng-options="value for value in widgetTypes">
+                                    ng-model="form.numIdWidgetType"
+                                    ng-options="widgetType.numIdWidgetType as widgetType.nomWidgetType for widgetType in widgetTypes" ng-change="selectedWidgetType();">
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="form-group" ng-class="{error: _form.name.$error && _form.submitted}">
                         <label class="control-label col-lg-4 col-md-4"></label>
                         <div class="col-lg-8 col-md-8">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -42,16 +42,16 @@
                     <div class="form-group">
                         <label class="control-label col-lg-4 col-md-4">Consultas</label>
                         <div class="col-lg-8 col-md-8">
-                            <select name="query"
+                            <select name="numIdWidgetQuery"
                                     class="form-control"
-                                    ng-model="form.chart.data"
-                                    ng-options="value for value in widgetQuerys">
+                                    ng-model="form.numIdWidgetQuery"
+                                    ng-options="widgetQuery.numIdWidgetQuery as widgetQuery.desQuery for widgetQuery in widgetQuerys" ng-change="selectedWidgetQuery();">
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="form-group" ng-class="{error: _form.sizeX.$error && _form.submitted}">
